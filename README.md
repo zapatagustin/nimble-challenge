@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# Nimble Gravity - Challenge Junior Fullstack Developer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mini aplicación en React + TypeScript + Tailwind CSS que consume la API del challenge de Nimble Gravity.
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Esta app realiza lo siguiente según los pasos del challenge:
 
-## React Compiler
+1. Obtiene los datos del candidato por email (`GET /api/candidate/get-by-email`)
+2. Lista las posiciones abiertas (`GET /api/jobs/get-list`)
+3. Muestra un card por cada posición con:
+   - Título del puesto
+   - Input para pegar la URL del repositorio GitHub
+   - Botón "Postularme" que envía el POST a `/api/candidate/apply-to-job`
+4. Maneja estados de carga, errores y éxito con feedback visual
+5. Tema visual Gruvbox dark + fuente FiraCode Nerd Font
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologías utilizadas
 
-## Expanding the ESLint configuration
+- **React 18** + **TypeScript**
+- **Vite** (build tool)
+- **Tailwind CSS v4** + tema Gruvbox
+- **FiraCode Nerd Font** para tipografía monoespaciada
+- Manejo de estados con hooks nativos (`useState`, `useEffect`)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Requisitos previos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js ≥ 18
+- npm o pnpm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Instalación y ejecución
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Clonar el repositorio
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+```bash
+git clone https://github.com/zapatagustin/nimble-challenge.git
+cd nimble-challenge
+npm install
+# o con pnpm
+pnpm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+npm run dev
+# abre http://localhost:5173
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+src/
+├── components/
+│   ├── JobCard.tsx          # Card de cada posición con form y submit
+│   └── LoadingSpinner.tsx   # Spinner de carga con tema Gruvbox
+├── lib/
+│   └── api.ts               # Funciones fetch tipadas
+├── types/
+│   └── index.ts             # Interfaces Candidate, Job, etc.
+├── App.tsx                  # Componente principal
+├── main.tsx                 # Entry point
+└── index.css                # Tailwind + @font-face + tema Gruvbox

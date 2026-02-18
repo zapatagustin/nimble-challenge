@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import JobCard from "./components/JobsCards";
 import { getCandidate, getJobs } from "./lib/api";
 import type { Candidate, Job } from "./types/interfaces";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const MY_EMAIL = "zapatagustin4@gmail.com";
 export default function App() {
@@ -28,10 +29,14 @@ export default function App() {
     init();
   }, []);
 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   if (error) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-12 text-center">
-        <h1 className="text-3xl font-bold text-red-600 mb-4">Error</h1>
+        <h1 className="text-3xl font-bold text-gruvbox-red mb-4">Error</h1>
         <p className="text-lg">{error}</p>
         <p className="mt-4">Por favor revisa la consola o intenta más tarde.</p>
       </div>
@@ -51,7 +56,7 @@ export default function App() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold ">Challenge Nimble Gravity</h1>
-          <p className="text-xl text-gray-700">
+          <p className="text-xl">
             Bienvenid@,{" "}
             <span className="font-semibold">
               {candidate.firstName} {candidate.lastName}
@@ -60,13 +65,13 @@ export default function App() {
           <div className="mt-4 text-sm text-gray-600 space-x-4">
             <span>
               UUID:{" "}
-              <code className="bg-gray-200 px-2 py-1 rounded">
+              <code className="px-2 py-1 rounded">
                 {candidate.uuid}
               </code>
             </span>
             <span>
               Candidate ID:{" "}
-              <code className="bg-gray-200 px-2 py-1 rounded">
+              <code className="px-2 py-1 rounded">
                 {candidate.candidateId}
               </code>
             </span>
@@ -103,7 +108,7 @@ export default function App() {
             href="https://github.com/zapatagustin/nimble-challenge"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline ml-1"
+            className="text-gruvbox-blue hover:underline ml-1"
           >
             https://github.com/zapatagustin/nimble-challenge
           </a>

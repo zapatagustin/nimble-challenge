@@ -1,4 +1,4 @@
-import type { ApplyPayload, Candidate, Job } from "../types/interfaces";
+import type { Candidate, Job } from "../types/interfaces";
 
 const BASE_URL =
   "https://botfilter-h5ddh6dye8exb7ha.centralus-01.azurewebsites.net";
@@ -50,12 +50,12 @@ export const applyToJob = async (payload: {
   if (!res.ok) {
     let errorBody = "";
     try {
-      const data = await res.json(); // ← Intenta parsear JSON
+      const data = await res.json();
       errorBody = data.message || data.error || JSON.stringify(data);
     } catch {
-      errorBody = await res.text(); // ← Si no es JSON, toma texto crudo
+      errorBody = await res.text();
     }
-    console.error("POST Error:", res.status, errorBody); // ← Esto va a la consola
+    console.error("POST Error:", res.status, errorBody);
     throw new Error(errorBody || `HTTP ${res.status} - Bad Request`);
   }
 

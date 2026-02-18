@@ -26,7 +26,6 @@ export default function JobCard({
   const handleSubmit = async () => {
     const trimmedUrl = repoUrl.trim();
 
-    // Validaciones básicas en frontend
     if (!trimmedUrl) {
       setMessage("Por favor ingresá la URL del repositorio");
       setStatus("error");
@@ -52,7 +51,6 @@ export default function JobCard({
       repoUrl: trimmedUrl,
     };
 
-    // Log para debuggear exactamente qué se envía
     console.log(
       "Enviando POST con este payload:",
       JSON.stringify(payload, null, 2),
@@ -64,7 +62,6 @@ export default function JobCard({
       setStatus("success");
       setMessage("¡Postulación enviada con éxito!");
     } catch (err: any) {
-      // Log detallado del error para ver el mensaje de la API
       console.error("Error completo en el submit:", err);
 
       let errorMsg = "Ocurrió un error al enviar la postulación";
@@ -78,9 +75,9 @@ export default function JobCard({
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-md p-6 border border-gray-700 hover:shadow-xl transition-all">
+    <div className="rounded-lg shadow-md p-6 border border-gruvbox-green hover:shadow-xl transition-all">
       <h3 className="text-xl font-semibold mb-3">{job.title}</h3>
-      <p className="text-sm mb-5">ID: {job.id}</p>
+      <p className="text-sm mb-5 text-gruvbox-yellow">ID: {job.id}</p>
 
       {status === "success" ? (
         <div className="p-4 rounded-md">{message}</div>
@@ -106,7 +103,7 @@ export default function JobCard({
               ${
                 status === "loading"
                   ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 active:bg-blue-800"
+                  : "bg-gruvbox-aqua hover:bg-gruvbox-blue active:bg-gruvbox-blue-bright"
               }
             `}
           >
@@ -114,7 +111,7 @@ export default function JobCard({
           </button>
 
           {status === "error" && message && (
-            <p className="text-red-400 text-sm text-center mt-2">{message}</p>
+            <p className="text-gruvbox-red text-sm text-center mt-2">{message}</p>
           )}
         </div>
       )}

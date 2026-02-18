@@ -1,42 +1,74 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+@theme {
+  --color-gruvbox-bg-hard: #1d2021;
+  --color-gruvbox-bg: #282828;
+  --color-gruvbox-bg-soft: #32302f;
+
+  --color-gruvbox-fg: #ebdbb2;
+
+  --color-gruvbox-gray-1: #928374;
+  --color-gruvbox-gray-2: #a89984;
+  --color-gruvbox-gray-3: #bdae93;
+  --color-gruvbox-gray-4: #d5c4a1;
+  --color-gruvbox-red: #cc241d;
+  --color-gruvbox-red-bright: #fb4934;
+  --color-gruvbox-green: #98971a;
+  --color-gruvbox-green-bright: #b8bb26;
+  --color-gruvbox-yellow: #d79921;
+  --color-gruvbox-yellow-bright: #fabd2f;
+  --color-gruvbox-blue: #458588;
+  --color-gruvbox-blue-bright: #83a598;
+  --color-gruvbox-aqua: #689d6a;
+  --color-gruvbox-aqua-bright: #8ec07c;
+  --color-gruvbox-orange: #d65d0e;
+  --color-gruvbox-orange-bright: #fe8019;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  @apply bg-gruvbox-bg text-gruvbox-fg min-h-screen;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input,
+textarea {
+  @apply bg-gruvbox-bg-soft border-gruvbox-gray-1 text-gruvbox-fg placeholder-gruvbox-gray-1;
+  border-width: 1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-.card {
-  padding: 2em;
+.animate-bounce {
+  animation: bounce 1.2s infinite;
 }
 
-.read-the-docs {
-  color: #888;
+.delay-150 { animation-delay: 0.15s; }
+.delay-300 { animation-delay: 0.3s; }
+
+@font-face {
+  font-family: 'FiraCode Nerd Font';
+  src: 
+    url('./assets/fonts/FiraCodeNerdFont-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FiraCode Nerd Font';
+  src: 
+    url('./assets/fonts/FiraCodeNerdFont-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+body, html {
+  font-family: 'FiraCode Nerd Font', 'Fira Code', Consolas, 'Courier New', monospace;
+}
+
+code {
+  @apply bg-gruvbox-bg-hard text-gruvbox-yellow px-1.5 py-0.5 rounded;
 }
